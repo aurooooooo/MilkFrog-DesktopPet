@@ -1,0 +1,29 @@
+{
+  "basePipeline": "whole-frame action frames, no mouse pad split",
+  "frames": {
+    "idle": "frames_no_face/idle_no_face.png",
+    "keyboard_tap_left": "frames_no_face/keyboard_tap_left_no_face.png",
+    "keyboard_tap_right": "frames_no_face/keyboard_tap_right_no_face.png",
+    "mouse_left_click": "frames_no_face/mouse_left_click_no_face.png",
+    "mouse_move": "frames_no_face/mouse_move_no_face.png",
+    "mouse_right_click": "frames_no_face/mouse_right_click_no_face.png"
+  },
+  "faceLayers": [
+    "eye_left_iris.png",
+    "eye_right_iris.png",
+    "pupil_left.png",
+    "pupil_right.png",
+    "mouth.png"
+  ],
+  "accessories": {
+    "eyePatch": "accessory_eye_patch.png",
+    "angry": "accessory_angry.png",
+    "meow": "accessory_meow.png"
+  },
+  "icon": "icon.png",
+  "audio": {
+    "keyboardTap": "audio/keyboard_tap.mp4",
+    "petClick": "audio/laugh.mp3"
+  },
+  "menu": "right-click context menu chooses one accessory at a time"
+}

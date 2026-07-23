@@ -1,0 +1,111 @@
+* { box-sizing: border-box; }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent;
+}
+
+.pet {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.pupil {
+  transition: transform 70ms linear;
+}
+
+.menu {
+  position: fixed;
+  display: none;
+  min-width: 168px;
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
+  padding: 8px;
+  border: 1px solid rgba(136, 91, 18, .36);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 28% 12%, rgba(255, 255, 230, .78), transparent 32%),
+    linear-gradient(145deg, rgba(255,246,164,.98), rgba(255,199,54,.96) 48%, rgba(213,146,26,.98));
+  box-shadow:
+    inset 0 2px 5px rgba(255,255,255,.72),
+    inset 0 -8px 18px rgba(160,94,0,.20),
+    0 14px 32px rgba(86,55,7,.28);
+  z-index: 20;
+  backdrop-filter: blur(8px);
+}
+
+.menu.open {
+  display: grid;
+  gap: 4px;
+}
+
+.menu::-webkit-scrollbar {
+  width: 7px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(137, 91, 18, .38);
+}
+
+.menu button,
+.menu-slider {
+  border: 0;
+  border-radius: 12px;
+  padding: 7px 10px;
+  background: linear-gradient(180deg, rgba(255,252,205,.78), rgba(255,209,70,.44));
+  text-align: left;
+  font: inherit;
+  color: #4f3304;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.75),
+    inset 0 -2px 5px rgba(170,100,0,.16);
+}
+
+.menu button:hover {
+  background: linear-gradient(180deg, rgba(255,255,226,.94), rgba(255,219,82,.64));
+}
+
+.menu button[aria-checked="true"]::before { content: "✓ "; }
+.menu button[aria-checked="false"]::before { content: "  "; }
+
+.menu-slider {
+  display: grid;
+  gap: 5px;
+  cursor: default;
+}
+
+.menu-slider span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.menu-slider input {
+  width: 100%;
+  accent-color: #e39e16;
+}
