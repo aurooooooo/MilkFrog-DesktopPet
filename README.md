@@ -3,7 +3,7 @@
 这是一个Windows奶蛙桌宠，灵感来自 BongoCat。桌宠会根据键盘输入和鼠标点击播放对应动作，也支持眼珠跟随鼠标、音效、装扮菜单和大小调整。
 
 <img width="280" height="186" alt="54a380af2e46fb9b83350c5d2ab7490f" src="https://github.com/user-attachments/assets/15f12d3e-b3b3-4f8c-beca-3e6012aec3cf" />
-
+运行具有反作弊的网游时，桌宠可能无法正常使用
 [点击下载 o(*￣▽￣*)ブ 最新版本](../../releases/latest)
 
 普通用户只需要下载 Release 里的 Windows exe 文件即可使用
