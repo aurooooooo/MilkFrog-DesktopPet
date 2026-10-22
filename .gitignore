@@ -1,6 +1,10 @@
 node_modules/
+.test-runtime/
+.test-artifacts/
 dist/
 release/
+build/native/
+rust/target/
 
 *.log
 *.tmp

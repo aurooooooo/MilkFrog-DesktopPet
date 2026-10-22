@@ -1,0 +1,9 @@
+{
+  "uninstallRegistration": true,
+  "desktopAndStartMenuShortcuts": true,
+  "installedBinaryMatches": true,
+  "passed": true,
+  "uninstallCleanup": true,
+  "startupUnchanged": true,
+  "settingsUnchanged": true
+}

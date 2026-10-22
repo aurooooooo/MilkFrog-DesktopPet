@@ -1,0 +1,8 @@
+Use case: precise-object-edit. Edit the attached approved MilkFrog desktop-pet scene. Preserve the exact yellow character identity, face, proportions, material, camera, cream tabletop, left frog-shaped mouse and mouse pad, and overall framing.
+ONLY turn the right-hand seven-key keyboard around by 180 degrees ON THE TABLE PLANE, so it is usable BY THE FROG sitting behind it, rather than by the viewer. This is a physical rotation of the whole keypad and its key layout, NOT a mirror of the scene and NOT merely a rotation of printed letters.
+The LONG SPACE BAR EDGE must now be the BACK EDGE of the keypad, immediately closest to the frog's belly/keyboard-side hand. The lone W key is now at the FRONT of the keypad closest to the viewer. In the viewer's image the keypad grid, from far/back to near/front, is:
+BACK / CLOSEST TO FROG: long Space on viewer-left spanning three columns, Ctrl on viewer-right.
+MIDDLE: D, S, A from viewer-left to viewer-right, and Shift to the right of A.
+FRONT / CLOSEST TO VIEWER: W centered below S.
+Exactly seven keycaps. Key labels are oriented to be readable by the frog (approximately upside-down to the viewer), not to face the viewer. Preserve each correct label: Space, Ctrl, D, S, A, Shift, W. Use a compact warm yellow base and cream keycaps, consistent perspective and existing scale. Move the keyboard-side hand slightly toward the back Space edge so keys remain visible.
+Keep EVERYTHING else fixed. Transparent RGBA beyond the character and tabletop silhouette. Clean cutout, no glow or aura. 1536x1024, landscape. No added props, text, symbols or watermark.

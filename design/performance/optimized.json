@@ -1,0 +1,90 @@
+{
+  "label": "optimized",
+  "at": "2026-10-21T09:31:48.969Z",
+  "electron": "31.7.7",
+  "pixels": {
+    "canvas": [
+      336,
+      224
+    ],
+    "images": {
+      "mouseArm": [
+        960,
+        640
+      ],
+      "mouse": [
+        960,
+        640
+      ],
+      "keyboardArm": [
+        960,
+        640
+      ],
+      "base": [
+        960,
+        640
+      ]
+    },
+    "ready": "true"
+  },
+  "idle": [
+    {
+      "type": "Browser",
+      "pid": 45244,
+      "workingSetMiB": 100.97265625,
+      "privateMiB": 68.7734375
+    },
+    {
+      "type": "GPU",
+      "pid": 39536,
+      "workingSetMiB": 65.78515625,
+      "privateMiB": 53.5078125
+    },
+    {
+      "type": "Utility",
+      "pid": 27572,
+      "workingSetMiB": 44.67578125,
+      "privateMiB": 13.17578125
+    },
+    {
+      "type": "Tab",
+      "pid": 24964,
+      "workingSetMiB": 133.16015625,
+      "privateMiB": 59.23046875
+    }
+  ],
+  "moving": [
+    {
+      "type": "Browser",
+      "pid": 45244,
+      "workingSetMiB": 98.296875,
+      "privateMiB": 68.77734375
+    },
+    {
+      "type": "GPU",
+      "pid": 39536,
+      "workingSetMiB": 62.546875,
+      "privateMiB": 53.234375
+    },
+    {
+      "type": "Utility",
+      "pid": 27572,
+      "workingSetMiB": 44.69921875,
+      "privateMiB": 13.1875
+    },
+    {
+      "type": "Tab",
+      "pid": 24964,
+      "workingSetMiB": 119.06640625,
+      "privateMiB": 52.515625
+    }
+  ],
+  "helpers": [
+    {
+      "Id": 10452,
+      "ProcessName": "MilkFrog.Input",
+      "WorkingSet64": 15429632,
+      "PrivateMemorySize64": 9854976
+    }
+  ]
+}

@@ -1,147 +1,56 @@
-const frames = {
-  idle: "../assets/frames_no_face/idle_no_face.png",
-  keyboard_tap_left: "../assets/frames_no_face/keyboard_tap_left_no_face.png",
-  keyboard_tap_right: "../assets/frames_no_face/keyboard_tap_right_no_face.png",
-  mouse_left_click: "../assets/frames_no_face/mouse_left_click_no_face.png",
-  mouse_right_click: "../assets/frames_no_face/mouse_right_click_no_face.png"
-};
-
 const stage = document.getElementById("stage");
 const scene = document.getElementById("scene");
-const menu = document.getElementById("menu");
-const sizeSlider = document.getElementById("sizeSlider");
-const pupilLeft = document.getElementById("pupilLeft");
-const pupilRight = document.getElementById("pupilRight");
+const rig = new MilkFrogRig(scene);
 
 const accessoryIds = ["eyePatch", "angry", "meow"];
-const audioState = { muted: false };
+const audioState = { muted: false, gameMode: false };
 const accessoryState = { selected: null };
 
-const keyboardTapAudio = new Audio("../assets/audio/keyboard_tap.mp4");
-const laughAudio = new Audio("../assets/audio/laugh.mp3");
-keyboardTapAudio.preload = "auto";
-keyboardTapAudio.volume = 0.38;
-laughAudio.preload = "auto";
-laughAudio.volume = 0.62;
-
-let keyboardSoundBusy = false;
-let keyFlip = 0;
-let stateTimer = 0;
+const media = new PetMedia(document.getElementById("laughVideo"), scene, rig,
+  () => window.petApp.setLaughing(media.laughing),
+  showStatus);
+const inputState = createInputState();
+const codeToVk = new Map(Object.entries(KEY_BINDINGS).map(([vk, binding]) => [binding.code, Number(vk)]));
 let pointerDown = false;
 let dragging = false;
 let lastPoint = { x: 0, y: 0 };
-let lastKeyboardTapAt = 0;
-let lastMouseTapAt = 0;
 
-keyboardTapAudio.addEventListener("ended", () => {
-  keyboardSoundBusy = false;
-});
-keyboardTapAudio.addEventListener("pause", () => {
-  if (keyboardTapAudio.ended) keyboardSoundBusy = false;
-});
-
-function clamp(value, min, max) {
-  return Math.max(min, Math.min(max, value));
+function renderInput() {
+  rig.setState(inputState.snapshot());
 }
 
-function setState(name, hold = 140) {
-  scene.src = frames[name] || frames.idle;
-  clearTimeout(stateTimer);
-  if (name !== "idle") {
-    stateTimer = setTimeout(() => setState("idle", 0), hold);
-  }
-}
-
-function playKeyboardSound() {
-  if (audioState.muted || keyboardSoundBusy) return;
-  keyboardSoundBusy = true;
-  keyboardTapAudio.currentTime = 0;
-  keyboardTapAudio.play().catch(() => {
-    keyboardSoundBusy = false;
-  });
-}
-
-function playSound(audio) {
-  if (audioState.muted) return;
-  audio.currentTime = 0;
-  audio.play().catch(() => {});
+function showStatus(message) {
+  const status = document.getElementById("petStatus");
+  status.textContent = message;
+  status.hidden = !message;
 }
 
 function applyAccessories() {
-  for (const id of accessoryIds) {
-    const enabled = accessoryState.selected === id;
-    const layer = document.getElementById(id);
-    layer.hidden = false;
-    layer.style.display = enabled ? "block" : "none";
-    const button = menu.querySelector(`[data-toggle="${id}"]`);
-    if (button) button.setAttribute("aria-checked", String(enabled));
-  }
-  const muteButton = menu.querySelector('[data-action="mute"]');
-  if (muteButton) muteButton.setAttribute("aria-checked", String(audioState.muted));
+  rig.setAccessory(accessoryState.selected);
+  media.setMuted(audioState.muted);
 }
 
-function updatePupilsAt(clientX, clientY) {
-  const rect = stage.getBoundingClientRect();
-  const cx = rect.left + rect.width * 0.51;
-  const cy = rect.top + rect.height * 0.19;
-  const nx = clamp((clientX - cx) / (rect.width * 0.40), -1, 1);
-  const ny = clamp((clientY - cy) / (rect.height * 0.40), -1, 1);
-  const motionScale = Math.min(rect.width / 1100, 1);
-  pupilLeft.style.transform = `translate(${nx * 7 * motionScale}px, ${ny * 5 * motionScale}px)`;
-  pupilRight.style.transform = `translate(${nx * 7 * motionScale}px, ${ny * 5 * motionScale}px)`;
+function updateKey(vk, down) {
+  if (!inputState.key(vk, down)) return;
+  if (down) media.playKeyboard();
+  renderInput();
 }
 
-function updatePupils(event) {
-  updatePupilsAt(event.clientX, event.clientY);
-}
-
-function triggerKeyboardTap() {
-  const now = Date.now();
-  if (now - lastKeyboardTapAt < 45) return;
-  lastKeyboardTapAt = now;
-  setState(keyFlip % 2 === 0 ? "keyboard_tap_left" : "keyboard_tap_right", 110);
-  playKeyboardSound();
-  keyFlip += 1;
-}
-
-function triggerMouseClick(button, playLaugh = false) {
-  const now = Date.now();
-  if (now - lastMouseTapAt < 55) return;
-  lastMouseTapAt = now;
-  if (menu.classList.contains("open")) return;
-  setState(button === 2 ? "mouse_right_click" : "mouse_left_click", 180);
-  if (button === 1 && playLaugh) playSound(laughAudio);
-}
-
-function showMenu(event) {
-  event.preventDefault();
-  menu.style.left = "8px";
-  menu.style.top = "8px";
-  menu.classList.add("open");
-  requestAnimationFrame(() => {
-    const rect = menu.getBoundingClientRect();
-    const left = clamp(event.clientX, 8, Math.max(8, window.innerWidth - rect.width - 8));
-    const top = clamp(event.clientY, 8, Math.max(8, window.innerHeight - rect.height - 8));
-    menu.style.left = `${left}px`;
-    menu.style.top = `${top}px`;
-  });
-}
-
-function hideMenu() {
-  menu.classList.remove("open");
+function updateMouseButton(button, down) {
+  if (!inputState.mouse(button, down)) return;
+  renderInput();
 }
 
 async function loadSettings() {
   const settings = await window.petApp.getSettings();
   audioState.muted = Boolean(settings.muted);
+  audioState.gameMode = Boolean(settings.gameMode);
   accessoryState.selected = settings.accessory || null;
-  sizeSlider.value = Math.round((settings.scale || 0.65) * 100);
   applyAccessories();
 }
 
 window.addEventListener("mousemove", (event) => {
-  updatePupils(event);
-  if (!pointerDown || event.target.closest("#menu")) return;
+  if (!pointerDown) return;
 
   const dx = event.screenX - lastPoint.x;
   const dy = event.screenY - lastPoint.y;
@@ -153,16 +62,17 @@ window.addEventListener("mousemove", (event) => {
 });
 
 window.addEventListener("keydown", (event) => {
+  if (event.code === "Escape") { media.stopLaugh(); return; }
   if (event.repeat) return;
-  triggerKeyboardTap();
+  updateKey(codeToVk.get(event.code), true);
 });
 
-window.addEventListener("keyup", () => setState("idle", 0));
+window.addEventListener("keyup", (event) => updateKey(codeToVk.get(event.code), false));
 
 stage.addEventListener("mousedown", (event) => {
-  if (event.target.closest("#menu")) return;
   if (event.button !== 0) return;
   pointerDown = true;
+  updateMouseButton(1, true);
   dragging = false;
   lastPoint = { x: event.screenX, y: event.screenY };
 });
@@ -170,75 +80,59 @@ stage.addEventListener("mousedown", (event) => {
 window.addEventListener("mouseup", (event) => {
   if (!pointerDown) return;
   pointerDown = false;
+  updateMouseButton(1, false);
   if (!dragging && event.button === 0) {
-    triggerMouseClick(1, true);
+    if (media.laughing) media.stopLaugh();
+    else media.playClick();
   }
-});
-
-stage.addEventListener("contextmenu", showMenu);
-
-menu.addEventListener("mousedown", (event) => {
-  event.stopPropagation();
-});
-
-menu.addEventListener("click", async (event) => {
-  event.stopPropagation();
-  const button = event.target.closest("button");
-  if (!button) return;
-
-  const toggle = button.dataset.toggle;
-  if (toggle) {
-    accessoryState.selected = accessoryState.selected === toggle ? null : toggle;
-    await window.petApp.setSettings({ accessory: accessoryState.selected });
-  }
-  if (button.dataset.action === "clear") {
-    accessoryState.selected = null;
-    await window.petApp.setSettings({ accessory: null });
-  }
-  if (button.dataset.action === "mute") {
-    audioState.muted = !audioState.muted;
-    await window.petApp.setSettings({ muted: audioState.muted });
-  }
-  if (button.dataset.action === "quit") {
-    window.petApp.quit();
-  }
-  applyAccessories();
-});
-
-sizeSlider.addEventListener("input", (event) => {
-  if (!menu.classList.contains("open")) return;
-  const scale = Number(event.target.value) / 100;
-  window.petApp.setScale(scale);
-});
-
-sizeSlider.addEventListener("change", async (event) => {
-  if (!menu.classList.contains("open")) return;
-  const scale = Number(event.target.value) / 100;
-  await window.petApp.setSettings({ scale });
-});
-
-window.addEventListener("click", (event) => {
-  if (!menu.contains(event.target)) hideMenu();
 });
 
 window.petApp.onSettingsChanged((settings) => {
   audioState.muted = Boolean(settings.muted);
+  audioState.gameMode = Boolean(settings.gameMode);
   accessoryState.selected = settings.accessory || null;
-  sizeSlider.value = Math.round((settings.scale || 0.65) * 100);
   applyAccessories();
+});
+
+window.petApp.onAction(async (action) => {
+  try {
+    showStatus("");
+    if (action === "laugh") media.toggleLaugh();
+    if (action === "stop") media.stopAll();
+    if (action && typeof action === "object" && (action.type === "clear" ||
+      (action.type === "accessory" && accessoryIds.includes(action.id)))) {
+      media.stopLaugh();
+      const next = action.type === "clear" || accessoryState.selected === action.id ? null : action.id;
+      const changed = next !== accessoryState.selected;
+      await window.petApp.setSettings({ accessory: next });
+      accessoryState.selected = next;
+      applyAccessories();
+      if (changed) media.playAccessoryVoice();
+    }
+  } catch (error) { showStatus("设置失败：" + error.message); }
 });
 
 window.petApp.onGlobalInput((payload) => {
   if (!payload) return;
-  if (payload.type === "cursor" && payload.point && payload.bounds) {
-    updatePupilsAt(payload.point.x - payload.bounds.x, payload.point.y - payload.bounds.y);
+  if (payload.type === "cursor" && payload.point && payload.displayBounds) {
+    const display = payload.displayBounds;
+    if (!(display.width > 0 && display.height > 0)) return;
+    const changed = inputState.cursor(
+      (payload.point.x - display.x) / display.width * 2 - 1,
+      (payload.point.y - display.y) / display.height * 2 - 1
+    );
+    if (changed) renderInput();
   }
-  if (payload.type === "key") {
-    triggerKeyboardTap();
+  if (payload.type === "keyDown" || payload.type === "keyUp") {
+    updateKey(payload.vk, payload.type === "keyDown");
   }
-  if (payload.type === "mouseDown") {
-    triggerMouseClick(payload.button);
+  if (payload.type === "mouseDown" || payload.type === "mouseUp") {
+    updateMouseButton(payload.button, payload.type === "mouseDown");
+  }
+  if (payload.type === "reset") {
+    inputState.reset();
+    renderInput();
   }
 });
 
-loadSettings();
+loadSettings().catch(error => showStatus(`读取设置失败：${error.message}`));

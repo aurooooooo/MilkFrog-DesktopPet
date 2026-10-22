@@ -1,46 +1,60 @@
 {
-  "name": "yellow-jelly-bongocat",
-  "version": "0.1.5",
-  "description": "Yellow Jelly BongoCat desktop pet",
+  "name": "milkfrog-desktop-pet",
+  "version": "0.3.1",
+  "description": "MilkFrog 奶蛙桌宠",
+  "author": "MilkFrog contributors",
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder --win portable nsis",
-    "build:portable": "electron-builder --win portable",
-    "build:installer": "electron-builder --win nsis"
+    "start": "node scripts/build-input.cjs && electron .",
+    "test": "node tests/input-state.test.js && node tests/startup.test.cjs && node tests/input-helper.test.cjs && node tests/menu.test.cjs",
+    "prepare:media": "node scripts/prepare-media.cjs",
+    "test:smoke": "electron tests/renderer-smoke.cjs",
+    "build:input": "node scripts/build-input.cjs",
+    "build": "node scripts/build-input.cjs && electron-builder --win portable nsis --x64",
+    "build:portable": "node scripts/build-input.cjs && electron-builder --win portable --x64",
+    "build:installer": "node scripts/build-input.cjs && electron-builder --win nsis --x64"
   },
   "devDependencies": {
     "electron": "31.7.7",
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.yellowjelly.bongocat",
-    "productName": "Yellow Jelly BongoCat",
+    "appId": "com.aurooooooo.milkfrog",
+    "productName": "MilkFrog DesktopPet",
     "electronVersion": "31.7.7",
+    "electronLanguages": ["zh-CN", "en-US"],
     "directories": {
       "output": "dist"
     },
     "files": [
       "src/**/*",
-      "assets/**/*",
-      "package.json"
+      "assets/runtime/**/*",
+      "assets/icon.ico",
+      "package.json",
+      "LICENSE",
+      "PRIVACY.md"
     ],
+    "extraResources": [{ "from": "build/native/MilkFrog.Input.exe", "to": "input/MilkFrog.Input.exe" }],
     "win": {
       "icon": "build/icon.ico",
       "target": [
         "portable",
         "nsis"
       ],
-      "signAndEditExecutable": false,
-      "verifyUpdateCodeSignature": false,
-      "artifactName": "${productName}-${version}-${arch}.${ext}"
+      "executableName": "MilkFrog.DesktopPet",
+      "requestedExecutionLevel": "asInvoker",
+      "artifactName": "MilkFrog-${version}-setup-${arch}.${ext}"
     },
     "portable": {
-      "artifactName": "${productName}-${version}-portable-${arch}.${ext}"
+      "artifactName": "MilkFrog-${version}-portable-${arch}.${ext}",
+      "requestExecutionLevel": "user"
     },
     "nsis": {
       "oneClick": false,
+      "include": "build/installer.nsh",
+      "perMachine": false,
+      "allowElevation": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,

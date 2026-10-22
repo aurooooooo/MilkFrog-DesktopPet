@@ -1,0 +1,57 @@
+{
+  "checks": [
+    "native-transparent-window",
+    "three-category-menu",
+    "seven-keys-and-combinations",
+    "physical-mouse-axes",
+    "accessories-and-random-voice",
+    "game-mode-styles-and-audio",
+    "mute",
+    "full-laugh-playback-and-alpha",
+    "stop-and-hide-release",
+    "15-to-135-percent",
+    "settings-save",
+    "resize-gdi-ownership",
+    "window-message-dispatch"
+  ],
+  "dimensions": [
+    624,
+    416
+  ],
+  "gdiObjectsBeforeAfter": [
+    12,
+    12
+  ],
+  "idlePixelMeanAbsoluteDifferenceAfterCrop": 0.0744701137204142,
+  "movingCpuPercentOneCore": 20.311712921124307,
+  "passed": true,
+  "processes": 1,
+  "samples": [
+    {
+      "privateMiB": 10.21875,
+      "stage": "idle",
+      "workingSetMiB": 22.46484375
+    },
+    {
+      "privateMiB": 11.203125,
+      "stage": "moving-with-audio",
+      "workingSetMiB": 27.015625
+    },
+    {
+      "privateMiB": 73.9375,
+      "stage": "laughing",
+      "workingSetMiB": 94.8515625
+    },
+    {
+      "privateMiB": 15.62890625,
+      "stage": "after-media",
+      "workingSetMiB": 38.34375
+    },
+    {
+      "privateMiB": 13.30859375,
+      "stage": "after-resizing",
+      "workingSetMiB": 38.83203125
+    }
+  ],
+  "version": "0.4.0"
+}

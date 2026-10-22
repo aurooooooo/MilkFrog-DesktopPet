@@ -1,0 +1,8 @@
+Use case: precise-object-edit. Edit the attached MilkFrog desktop-pet concept with only two targeted corrections, preserving everything else: the same yellow character identity, green eyes, smile, body proportions, cream belly, brown fingertips, left frog mouse and pad, right seven-key keypad, cream tabletop, camera, composition, material and overall image dimensions.
+Correction 1: correct the gaming keypad layout. There must still be exactly seven keycaps with the same labels: W, A, S, D, Shift, Ctrl, Space. KEEP the A-S-D row, Shift left of A, Ctrl below Shift, and Space bar below A-S-D. MOVE the W key so that it sits in the row immediately BEHIND THE S KEY, centered on the S column in the keyboard's own perspective. W must be above S, NOT above A. The logical grid in keypad coordinates must be:
+[empty] [empty] [W] [empty]
+[Shift] [A] [S] [D]
+[Ctrl] [one long Space across A/S/D].
+Remove W from its previous position behind A; do not leave an extra key or ghost impression there. Move the keyboard hand slightly backwards if necessary so W and every other key label remain fully visible.
+Correction 2: REMOVE all the yellow rim glow/halo and diffuse outer haze around the character and tabletop. Edges against transparency must be clean and natural with only subtle antialiasing; no luminous aura, bloom, broad translucent shadow or fog in the transparent area. Keep the soft natural contact shading INSIDE the scene.
+Output: same 1536x1024 landscape full scene, genuinely transparent RGBA outside the character and tabletop silhouette. Preserve everything else. No new elements, no text except the seven exact key labels, no diagram labels, no watermark. This is still a visual draft, not a sprite atlas.

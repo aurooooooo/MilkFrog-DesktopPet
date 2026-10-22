@@ -1,0 +1,18 @@
+{
+  "canvas": { "width": 1536, "height": 1024 },
+  "layers": {
+    "base": "base.png",
+    "mouse": "mouse.png",
+    "mouseArm": "mouse-arm-balanced.png",
+    "keyboardArm": "keyboard-arm-balanced.png"
+  },
+  "fallback": "preview.png",
+  "keyboard": {
+    "faces": "frog",
+    "backEdge": "Space",
+    "frontEdge": "W",
+    "keys": ["A", "W", "S", "D", "ShiftLeft", "ControlLeft", "Space"]
+  },
+  "generation": "Built-in imagegen; reference and exact prompts in design/seven-key-v1",
+  "animation": "2D arm deformation, simultaneous key indicators and independent cursor movement"
+}

@@ -1,0 +1,238 @@
+[
+  {
+    "kind": "key",
+    "vk": 32,
+    "target": [
+      1012.25,
+      563.25
+    ]
+  },
+  {
+    "kind": "key",
+    "vk": 65,
+    "target": [
+      1105.75,
+      642.5
+    ]
+  },
+  {
+    "kind": "key",
+    "vk": 68,
+    "target": [
+      874.75,
+      605
+    ]
+  },
+  {
+    "kind": "key",
+    "vk": 83,
+    "target": [
+      990.25,
+      625.25
+    ]
+  },
+  {
+    "kind": "key",
+    "vk": 87,
+    "target": [
+      996.75,
+      692.25
+    ]
+  },
+  {
+    "kind": "key",
+    "vk": 160,
+    "target": [
+      1227,
+      664.75
+    ]
+  },
+  {
+    "kind": "key",
+    "vk": 162,
+    "target": [
+      1237.5,
+      600.75
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": -1,
+    "y": -1,
+    "pressed": false,
+    "target": [
+      510.91996971929433,
+      528.3113713235593
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": -1,
+    "y": -1,
+    "pressed": true,
+    "target": [
+      508.57537658309747,
+      531.6790596464602
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": -1,
+    "y": 0,
+    "pressed": false,
+    "target": [
+      531.5523893178266,
+      498.67571408203116
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": -1,
+    "y": 0,
+    "pressed": true,
+    "target": [
+      529.2077961816298,
+      502.04340240493207
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": -1,
+    "y": 1,
+    "pressed": false,
+    "target": [
+      552.1848089163589,
+      469.040056840503
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": -1,
+    "y": 1,
+    "pressed": true,
+    "target": [
+      549.840215780162,
+      472.4077451634039
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 0,
+    "y": -1,
+    "pressed": false,
+    "target": [
+      456.35283570173345,
+      551.1816638016703
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 0,
+    "y": -1,
+    "pressed": true,
+    "target": [
+      457.1928535488951,
+      551.3270152044375
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 0,
+    "y": 0,
+    "pressed": false,
+    "target": [
+      455,
+      515
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 0,
+    "y": 0,
+    "pressed": true,
+    "target": [
+      455,
+      520
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 0,
+    "y": 1,
+    "pressed": false,
+    "target": [
+      455,
+      471
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 0,
+    "y": 1,
+    "pressed": true,
+    "target": [
+      455,
+      476
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 1,
+    "y": -1,
+    "pressed": false,
+    "target": [
+      359.25986375707924,
+      534.3813068584379
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 1,
+    "y": -1,
+    "pressed": true,
+    "target": [
+      360.09988160424086,
+      534.5266582612053
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 1,
+    "y": 0,
+    "pressed": false,
+    "target": [
+      355,
+      515
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 1,
+    "y": 0,
+    "pressed": true,
+    "target": [
+      355,
+      520
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 1,
+    "y": 1,
+    "pressed": false,
+    "target": [
+      355,
+      471
+    ]
+  },
+  {
+    "kind": "mouse",
+    "x": 1,
+    "y": 1,
+    "pressed": true,
+    "target": [
+      355,
+      476
+    ]
+  }
+]

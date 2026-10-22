@@ -1,5 +1,6 @@
 {
-  "basePipeline": "whole-frame action frames, no mouse pad split",
+  "basePipeline": "layered canvas with anchored arms, independent mouse and seven keys",
+  "activeScene": "seven-key/manifest.json",
   "frames": {
     "idle": "frames_no_face/idle_no_face.png",
     "keyboard_tap_left": "frames_no_face/keyboard_tap_left_no_face.png",

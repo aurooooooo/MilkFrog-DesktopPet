@@ -1,0 +1,114 @@
+{
+  "label": "baseline",
+  "at": "2026-10-21T09:21:25.004Z",
+  "electron": "31.7.7",
+  "pixels": {
+    "canvas": [
+      1536,
+      1024
+    ],
+    "images": {
+      "eyePatch": [
+        1536,
+        1024
+      ],
+      "mouseArm": [
+        1536,
+        1024
+      ],
+      "angry": [
+        1536,
+        1024
+      ],
+      "keyboardArm": [
+        1536,
+        1024
+      ],
+      "meow": [
+        1536,
+        1024
+      ],
+      "mouse": [
+        1536,
+        1024
+      ],
+      "base": [
+        1536,
+        1024
+      ]
+    },
+    "ready": "true"
+  },
+  "idle": [
+    {
+      "type": "Browser",
+      "pid": 24344,
+      "workingSetMiB": 98.6875,
+      "privateMiB": 68.5703125
+    },
+    {
+      "type": "GPU",
+      "pid": 35788,
+      "workingSetMiB": 197.05078125,
+      "privateMiB": 366.59375
+    },
+    {
+      "type": "Utility",
+      "pid": 34248,
+      "workingSetMiB": 44.71875,
+      "privateMiB": 13.40625
+    },
+    {
+      "type": "Tab",
+      "pid": 28064,
+      "workingSetMiB": 129.9296875,
+      "privateMiB": 39.35546875
+    },
+    {
+      "type": "Utility",
+      "pid": 2428,
+      "workingSetMiB": 70.50390625,
+      "privateMiB": 12.43359375
+    }
+  ],
+  "moving": [
+    {
+      "type": "Browser",
+      "pid": 24344,
+      "workingSetMiB": 97.93359375,
+      "privateMiB": 68.515625
+    },
+    {
+      "type": "GPU",
+      "pid": 35788,
+      "workingSetMiB": 158.91015625,
+      "privateMiB": 309.84765625
+    },
+    {
+      "type": "Utility",
+      "pid": 34248,
+      "workingSetMiB": 44.7421875,
+      "privateMiB": 13.41796875
+    },
+    {
+      "type": "Tab",
+      "pid": 28064,
+      "workingSetMiB": 132.234375,
+      "privateMiB": 40.5234375
+    },
+    {
+      "type": "Utility",
+      "pid": 2428,
+      "workingSetMiB": 70.55859375,
+      "privateMiB": 12.375
+    }
+  ],
+  "helpers": [
+    {
+      "Id": 25228,
+      "ProcessName": "powershell",
+      "WorkingSet64": 88293376,
+      "PrivateMemorySize64": 72306688
+    }
+  ]
+}

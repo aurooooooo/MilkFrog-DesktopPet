@@ -3,36 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yellow Jelly BongoCat</title>
+  <title>MilkFrog 奶蛙桌宠</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <main id="stage" class="stage">
     <section id="pet" class="pet">
-      <img id="scene" class="layer" src="../assets/frames_no_face/idle_no_face.png" alt="" draggable="false" />
-      <img class="layer" src="../assets/eye_left_iris.png" alt="" draggable="false" />
-      <img class="layer" src="../assets/eye_right_iris.png" alt="" draggable="false" />
-      <img id="pupilLeft" class="layer pupil" src="../assets/pupil_left.png" alt="" draggable="false" />
-      <img id="pupilRight" class="layer pupil" src="../assets/pupil_right.png" alt="" draggable="false" />
-      <img class="layer" src="../assets/mouth.png" alt="" draggable="false" />
-      <img id="eyePatch" class="layer accessory" src="../assets/accessory_eye_patch.png" alt="" draggable="false" hidden />
-      <img id="angry" class="layer accessory" src="../assets/accessory_angry.png" alt="" draggable="false" hidden />
-      <img id="meow" class="layer accessory" src="../assets/accessory_meow.png" alt="" draggable="false" hidden />
+      <img id="sceneFallback" class="layer" src="../assets/runtime/preview.webp" alt="" draggable="false" />
+      <canvas id="scene" class="layer" role="img" aria-label="奶蛙操作朝向自己的七键键盘和鼠标"></canvas>
+      <video id="laughVideo" class="layer" preload="none" playsinline hidden aria-label="奶蛙捧腹大笑"></video>
     </section>
 
-    <nav id="menu" class="menu" role="menu" aria-label="桌宠菜单">
-      <button data-toggle="eyePatch" role="menuitemcheckbox" aria-checked="false">眼罩</button>
-      <button data-toggle="angry" role="menuitemcheckbox" aria-checked="false">生气</button>
-      <button data-toggle="meow" role="menuitemcheckbox" aria-checked="false">喵</button>
-      <label class="menu-slider">
-        <span>大小</span>
-        <input id="sizeSlider" type="range" min="35" max="135" step="5" value="65" />
-      </label>
-      <button data-action="mute" role="menuitemcheckbox" aria-checked="false">静音</button>
-      <button data-action="clear" role="menuitem">清除装扮</button>
-      <button data-action="quit" role="menuitem">退出</button>
-    </nav>
+    <p id="petStatus" class="pet-status" role="status" hidden></p>
   </main>
+  <script src="./input-state.js"></script>
+  <script src="./rig.js"></script>
+  <script src="./pet-media.js"></script>
   <script src="./renderer.js"></script>
 </body>
 </html>
