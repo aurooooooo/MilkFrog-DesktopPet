@@ -37,14 +37,12 @@ fn pcm(bytes: &'static [u8]) -> Option<&'static [u8]> {
 }
 // The header address and PCM bytes stay alive until waveOutReset completes.
 pub struct Sound {
+    pub clip: &'static [u8],
     device: HWAVEOUT,
     header: Box<UnsafeCell<WAVEHDR>>,
     _silent_pcm: Option<Box<[u8]>>,
 }
 impl Sound {
-    pub fn play(bytes: &'static [u8], silent: bool) -> Result<Self, String> {
-        Self::play_from(bytes, silent, 0.)
-    }
     pub fn play_from(bytes: &'static [u8], silent: bool, seconds: f64) -> Result<Self, String> {
         unsafe {
             let data = pcm(bytes).ok_or("Invalid embedded PCM")?;
@@ -93,6 +91,7 @@ impl Sound {
                 return Err("Unable to prepare audio".into());
             }
             let sound = Self {
+                clip: bytes,
                 device,
                 header,
                 _silent_pcm: silent_pcm,
@@ -118,23 +117,14 @@ impl Drop for Sound {
 }
 #[derive(Default)]
 pub struct Audio {
-    pub keyboard: Option<Sound>,
     pub effect: Option<Sound>,
     pub muted: bool,
     pub silent: bool,
 }
 impl Audio {
     pub fn poll(&mut self) {
-        if self.keyboard.as_ref().is_some_and(Sound::done) {
-            self.keyboard = None;
-        }
         if self.effect.as_ref().is_some_and(Sound::done) {
             self.effect = None;
-        }
-    }
-    pub fn tap(&mut self) {
-        if !self.muted && self.keyboard.is_none() {
-            self.keyboard = Sound::play(TAP, self.silent).ok();
         }
     }
     pub fn effect(&mut self, bytes: &'static [u8]) {
@@ -147,7 +137,6 @@ impl Audio {
         }
     }
     pub fn stop(&mut self) {
-        self.keyboard = None;
         self.effect = None;
     }
 }

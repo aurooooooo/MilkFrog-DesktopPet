@@ -113,13 +113,16 @@ pub unsafe fn run(app: &mut App) -> Result<(), String> {
     )?;
     let _ = DestroyMenu(menu);
     for vk in rig::KEYS {
-        app.input.key(vk, true);
+        app.update_key(vk, true);
         app.animating = true;
         app.dirty = true;
-        app.audio.tap();
         pump(app, 0.12)?;
         check(app.input.keys.contains(&vk), "Held key missing")?;
-        app.input.key(vk, false);
+        check(
+            app.audio.effect.is_none(),
+            "Tracked keys must not play audio",
+        )?;
+        app.update_key(vk, false);
     }
     app.input.key(87, true);
     app.input.key(32, true);
@@ -138,12 +141,15 @@ pub unsafe fn run(app: &mut App) -> Result<(), String> {
         app.input.cursor = [(t * 2.).sin(), (t * 2.).cos()];
         app.dirty = true;
         app.animating = true;
-        app.audio.tap();
         pump(app, 0.03)?;
     }
     let moving_cpu_percent_one_core =
         (cpu_seconds()? - moving_cpu) / start.elapsed().as_secs_f64() * 100.;
-    samples.push(memory("moving-with-audio")?);
+    check(
+        app.audio.effect.is_none(),
+        "Mouse and keyboard tracking must stay silent",
+    )?;
+    samples.push(memory("moving-silent")?);
     app.input = Input::default();
     app.animating = true;
     for (id, name) in [(101, "eye-patch"), (102, "angry"), (103, "meow")] {
@@ -156,6 +162,13 @@ pub unsafe fn run(app: &mut App) -> Result<(), String> {
         )?;
     }
     app.command(104)?;
+    check(
+        app.audio
+            .effect
+            .as_ref()
+            .is_some_and(|sound| sound.clip == audio::TAP),
+        "Clear accessory must play the former keyboard sound",
+    )?;
     pump(app, 0.1)?;
     check(app.settings.accessory_id() == 0, "Clear accessory failed")?;
     app.command(502)?;

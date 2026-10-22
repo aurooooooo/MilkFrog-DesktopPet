@@ -16,12 +16,12 @@ $petSettings=Join-Path $env:APPDATA 'MilkFrogRust\settings.json'
 $petSettingsBefore=if(Test-Path -LiteralPath $petSettings){(Get-FileHash -LiteralPath $petSettings).Hash}else{$null}
 $petInstalled=$false
 try{
-  $petSetup=Join-Path $petRoot 'dist\MilkFrog-0.4.0-rust-setup-x64.exe'
+  $petSetup=Join-Path $petRoot 'dist\MilkFrog-0.4.1-rust-setup-x64.exe'
   $petInstall=Start-Process -FilePath $petSetup -ArgumentList '/S',"/D=$petInstallDir" -WindowStyle Hidden -PassThru -Wait
   if($petInstall.ExitCode -ne 0){throw "Installer exited with $($petInstall.ExitCode)"}
   $petInstalled=$true
   $petExe=Join-Path $petInstallDir 'MilkFrog.exe'
-  $petOriginal=Join-Path $petRoot 'dist\MilkFrog-0.4.0-rust-x64.exe'
+  $petOriginal=Join-Path $petRoot 'dist\MilkFrog-0.4.1-rust-x64.exe'
   if((Get-FileHash -LiteralPath $petExe).Hash -ne (Get-FileHash -LiteralPath $petOriginal).Hash){throw 'Installed executable differs from validated Rust binary'}
   foreach($petPath in @($petDesktopLink,(Join-Path $petMenuDir '奶蛙桌宠.lnk'),(Join-Path $petMenuDir '卸载奶蛙桌宠.lnk'),(Join-Path $petInstallDir 'ThirdPartyLicenses.txt'),(Join-Path $petInstallDir 'Uninstall.exe'))){
     if(-not(Test-Path -LiteralPath $petPath)){throw "Missing installed file: $petPath"}

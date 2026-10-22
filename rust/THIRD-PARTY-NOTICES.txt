@@ -1,4 +1,4 @@
-MilkFrog DesktopPet Rust 0.4.0
+MilkFrog DesktopPet Rust 0.4.1
 Project license: MIT (see LICENSE in the source repository).
 Media attribution: rust/assets/SOURCES.md and assets/runtime/SOURCES.md.
 

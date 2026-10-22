@@ -22,8 +22,8 @@ fn main() {
     text.push_str(
         r#"
 1 VERSIONINFO
-FILEVERSION 0,4,0,0
-PRODUCTVERSION 0,4,0,0
+FILEVERSION 0,4,1,0
+PRODUCTVERSION 0,4,1,0
 FILEFLAGSMASK 0x3fL
 FILEFLAGS 0x0L
 FILEOS 0x40004L
@@ -34,10 +34,10 @@ BEGIN
     BLOCK "040904b0"
     BEGIN
       VALUE "FileDescription", "MilkFrog Native Desktop Pet"
-      VALUE "FileVersion", "0.4.0"
+      VALUE "FileVersion", "0.4.1"
       VALUE "ProductName", "MilkFrog DesktopPet Rust"
-      VALUE "ProductVersion", "0.4.0"
-      VALUE "OriginalFilename", "MilkFrog-0.4.0-rust-x64.exe"
+      VALUE "ProductVersion", "0.4.1"
+      VALUE "OriginalFilename", "MilkFrog-0.4.1-rust-x64.exe"
     END
   END
   BLOCK "VarFileInfo"

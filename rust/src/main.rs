@@ -385,16 +385,16 @@ impl App {
             }
         }
     }
+    fn update_key(&mut self, vk: u16, down: bool) {
+        if self.input.key(vk, down) {
+            self.dirty = true;
+            self.animating = true;
+        }
+    }
     unsafe fn poll_input(&mut self) {
         for vk in rig::KEYS {
             let down = GetAsyncKeyState(vk as i32) as u16 & 0x8000 != 0;
-            if self.input.key(vk, down) {
-                self.dirty = true;
-                self.animating = true;
-                if down && self.video.is_none() {
-                    self.audio.tap();
-                }
-            }
+            self.update_key(vk, down);
         }
         for (i, vk) in [1, 2].into_iter().enumerate() {
             let down = GetAsyncKeyState(vk) as u16 & 0x8000 != 0;
@@ -614,11 +614,15 @@ impl App {
                 self.rig.accessory(next);
                 self.save();
                 if changed {
-                    self.voice_seed ^= self.voice_seed << 13;
-                    self.voice_seed ^= self.voice_seed >> 7;
-                    self.voice_seed ^= self.voice_seed << 17;
-                    self.audio
-                        .effect(audio::VOICES[(self.voice_seed % 4) as usize]);
+                    if id == 104 {
+                        self.audio.effect(audio::TAP);
+                    } else {
+                        self.voice_seed ^= self.voice_seed << 13;
+                        self.voice_seed ^= self.voice_seed >> 7;
+                        self.voice_seed ^= self.voice_seed << 17;
+                        self.audio
+                            .effect(audio::VOICES[(self.voice_seed % 4) as usize]);
+                    }
                 }
             }
             200 => {

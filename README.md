@@ -1,22 +1,22 @@
 # MilkFrog DesktopPet 奶蛙桌宠
 
-Windows 10/11 x64 奶蛙桌宠。**0.4.0 起主版本使用 Rust + 原生 Win32 窗口，发行版不包含 Electron、WebView、Node.js 或输入助手。**
+Windows 10/11 x64 奶蛙桌宠。**主版本使用 Rust + 原生 Win32 窗口，发行版不包含 Electron、WebView、Node.js 或输入助手。**
 
 <img width="540" alt="奶蛙与朝向自己的七键键盘" src="assets/seven-key/preview.png" />
 
 ## 使用
 
-**下载 Windows x64：**[安装版](https://github.com/aurooooooo/MilkFrog-DesktopPet/releases/latest/download/MilkFrog-0.4.0-rust-setup-x64.exe) · [免安装版](https://github.com/aurooooooo/MilkFrog-DesktopPet/releases/latest/download/MilkFrog-0.4.0-rust-x64.exe) · [发布说明与校验文件](https://github.com/aurooooooo/MilkFrog-DesktopPet/releases/latest)
+**下载 Windows x64：**[安装版](https://github.com/aurooooooo/MilkFrog-DesktopPet/releases/latest/download/MilkFrog-0.4.1-rust-setup-x64.exe) · [免安装版](https://github.com/aurooooooo/MilkFrog-DesktopPet/releases/latest/download/MilkFrog-0.4.1-rust-x64.exe) · [发布说明与校验文件](https://github.com/aurooooooo/MilkFrog-DesktopPet/releases/latest)
 
-推荐运行 `dist/MilkFrog-0.4.0-rust-setup-x64.exe` 安装，可选择当前用户可写的安装位置，创建桌面与开始菜单快捷方式，并在 Windows 应用列表中提供卸载入口；无需管理员权限。
+推荐运行 `dist/MilkFrog-0.4.1-rust-setup-x64.exe` 安装，可选择当前用户可写的安装位置，创建桌面与开始菜单快捷方式，并在 Windows 应用列表中提供卸载入口；无需管理员权限。
 
-免安装使用 `dist/MilkFrog-0.4.0-rust-x64.exe`，开发目录可双击 `start.bat`。安装、升级或卸载前先从托盘退出正在运行的 Rust 奶蛙。所有图像、音效和动画已嵌入 EXE，无需复制素材文件夹或安装 Rust。
+免安装使用 `dist/MilkFrog-0.4.1-rust-x64.exe`，开发目录可双击 `start.bat`。安装、升级或卸载前先从托盘退出正在运行的 Rust 奶蛙。所有图像、音效和动画已嵌入 EXE，无需复制素材文件夹或安装 Rust。
 
-- A / W / S / D / 左 Shift / 左 Ctrl / 空格，支持按住、组合键和独立按下反馈。
+- A / W / S / D / 左 Shift / 左 Ctrl / 空格，支持按住、组合键和独立按下反馈；按键跟踪不播放音频。
 - 沿用已确认的七键布局、手臂形状、鼠标方向和移动范围，眼珠与手臂平滑跟踪鼠标。
 - 奶蛙右键：装扮、动作、大小。原生菜单不受奶蛙窗口大小裁切。
 - 尺寸 15%～135%，默认 65%，常用比例和每次 5% 微调。
-- 三种装扮；切换、取消及清除已有装扮时随机播放四条语音之一。
+- 三种装扮；切换或取消形象时随机播放四条语音之一。“清除装扮”改为播放原来的按键音。
 - 捧腹大笑：透明动画与笑声，结束恢复桌宠；再次选择、单击或 Esc 停止。
 - 托盘右键：显示、隐藏、装扮、动作、大小、静音、自启动、游戏模式、退出。
 - 游戏模式鼠标穿透、不抢焦点，仍允许音频；静音独立控制所有声音。
@@ -40,7 +40,7 @@ cargo fetch --manifest-path rust/Cargo.toml
 
 `scripts/rust.ps1` 优先兼容本工作区的 `.native-toolchain` 编译工具缓存；其他开发机正常安装 Visual Studio C++ Build Tools 即可。使用静态 CRT 链接，避免要求额外安装 VC++ 运行库。
 
-构建结果为 `dist/MilkFrog-0.4.0-rust-x64.exe`（免安装）和 `dist/MilkFrog-0.4.0-rust-setup-x64.exe`（安装包），附带 SHA256 和第三方许可清单。安装包构建需要 NSIS 3，优先使用本工作区已有缓存或 PATH 中的 `makensis.exe`。内嵌资源已准备好，普通构建不需要 FFmpeg、Electron 或另一个仓库。
+构建结果为 `dist/MilkFrog-0.4.1-rust-x64.exe`（免安装）和 `dist/MilkFrog-0.4.1-rust-setup-x64.exe`（安装包），附带 SHA256 和第三方许可清单。安装包构建需要 NSIS 3，优先使用本工作区已有缓存或 PATH 中的 `makensis.exe`。内嵌资源已准备好，普通构建不需要 FFmpeg、Electron 或另一个仓库。
 
 重做素材时才运行：
 
@@ -58,7 +58,7 @@ node scripts/prepare-rust.cjs
 
 自检启动隐藏原生窗口，使用本程序内部的模拟输入，不向系统合成键鼠；验证装扮、原生菜单、尺寸、实际 Windows 音频设备、完整透明大笑播放和资源释放。音频测试静音，不改系统启动项，结果和截图写到当前工作目录的 `.test-artifacts/rust/`。
 
-数据和验证边界见 [Rust 0.4.0 验证](design/0.4.0-rust验证.md)。内存随系统缩放、窗口大小、视频解码器和运行时长变化，短测不等于长期无泄漏。
+数据和验证边界见 [Rust 0.4.1 验证](design/0.4.1-rust验证.md)。内存随系统缩放、窗口大小、视频解码器和运行时长变化，短测不等于长期无泄漏。
 
 ## 实现
 
